@@ -1,0 +1,45 @@
+const addBtn = document.getElementById("addBtn");
+const taskInput = document.getElementById("taskInput");
+const taskList = document.getElementById("taskList");
+
+addBtn.addEventListener("click", addTask);
+
+function addTask() {
+    const taskText = taskInput.value.trim();
+
+    if (taskText === "") {
+        alert("Please enter a task!");
+        return;
+    }
+
+    // Create list item
+    const li = document.createElement("li");
+
+    // Task text span
+    const span = document.createElement("span");
+    span.textContent = taskText;
+
+    // Toggle complete
+    span.addEventListener("click", function () {
+        span.classList.toggle("completed");
+    });
+
+    // Remove button
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "Delete";
+    removeBtn.classList.add("remove-btn");
+
+    removeBtn.addEventListener("click", function () {
+        li.remove();
+    });
+
+    // Add to li
+    li.appendChild(span);
+    li.appendChild(removeBtn);
+
+    // Add li to list
+    taskList.appendChild(li);
+
+    // Clear input box
+    taskInput.value = "";
+}
